@@ -194,31 +194,13 @@
             <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/14-T5xtyXngI1rA88E2B0AJOiu3XKosz8aOpCWzByToI/edit#gid=1726187797">
                 <span class="nav-item">Checklist Capstone Project SE</span>
             </a></li>
-            <!-- <li><a href="#">
-                <i class="fas fa-chart-bar"></i>
-                <span class="nav-item">Attendance</span>
-            </a></li>
-            <li><a href="#">
-                <i class="fas fa-cog"></i>
-                <span class="nav-item">Setting</span>
-            </a></li> -->
         </ul>
     </aside>
     <main>
         <div class="main-top">
         
             <h1 class="title-dashboard">Dashboard Team 8 Section Palembang</h1>
-            
-            <!-- <div class="dropdown">
-                <label for="">Choose Diagram :</label>
-                <select name="" id="">
-                    <option value="" ></option>
-                    <option value="" id="optionRevenue">Data Chart Revenue in 2014</option>
-                    <option value="" id="optionOrder">Data Chart Order Quantity in 2014</option>
-                    <option value="" id="optionRevenueOrder">Data Chart Revenue Order Quantity in 2014</option>
-                </select>
-            </div> -->
-            
+                
         </div>
 
         <div class="main-skills">
@@ -227,8 +209,6 @@
 
                 <div style="width: 400px">
                     <canvas id="chartRevenueOrder"></canvas>
-                    <canvas id="chartRevenue" style="display: none"></canvas>
-                    <canvas id="chartOrder" style="display: none"></canvas>
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -237,32 +217,8 @@
                 <script type="module">
 
                     const chartRevenueOrder = document.getElementById("chartRevenueOrder");
-                    const chartRevenue = document.getElementById("chartRevenue");
-                    const chartOrder = document.getElementById("chartOrder");
 
-                    const optionRevenueOrder = document.getElementById("chartOrder");
-                    const optionRevenue = document.getElementById("optionRevenue");
-                    const optionOrder = document.getElementById("optionOrder");
-
-                    optionRevenueOrder.addEventListener("click", () => {
-                        chartRevenueOrder.style.display = "block";
-                        chartRevenue.style.display = "none";
-                        chartOrder.style.display = "none";
-                    });
-
-                    optionRevenue.addEventListener("click", () => {
-                        chartRevenue.style.display = "block";
-                        chartRevenueOrder.style.display = "none";
-                        chartOrder.style.display = "none";
-                    });
-
-                    optionOrder.addEventListener("click", () => {
-                        chartOrder.style.display = "block";
-                        chartRevenue.style.display = "none";
-                        chartRevenueOrder.style.display = "none";
-                    });
-
-                    async function DataRevenueOrder() {
+                    
                         const dataJson1 = await fetch("./data/revenue_order_quantity.json");
                         const dataObj1 = await dataJson1.json();
                         console.log(dataJson1)
@@ -301,51 +257,7 @@
                                 }
                             }, //pluggin zoom
                         });
-                    }
                     
-                    async function DataRevenue() {
-                        const dataJson2 = await fetch("./data/total_revenue_perbulan2014.json");
-                        const dataObj2 = await dataJson2.json();
-
-                        
-                        new Chart(chartRevenue, {
-                        type: "line",
-                        data: {
-                            labels: dataObj2.map((item) => item.bulan),
-                            datasets: [
-                            {
-                                label: "Total Revenue perbulan tahun 2014",
-                                data: dataObj2.map((item) => item.total_revenue),
-                                borderWidth: 1,
-                            },
-                            ],
-                        },
-                        });
-                    }
-
-                    async function DataOrder() {
-                        const dataJson3 = await fetch("./data/total_revenue_perbulan2014.json");
-                        const dataObj3 = await dataJson3.json();
-
-                        
-                        new Chart(chartOrder, {
-                        type: "line",
-                        data: {
-                            labels: dataObj3.map((item) => item.bulan),
-                            datasets: [
-                            {
-                                label: "Total Order Quantity perbulan tahun 2014",
-                                data: dataObj3.map((item) => item.total_order_quantity),
-                                borderWidth: 1,
-                            },
-                            ],
-                        },
-                        });
-                    }
-                    
-                    DataRevenueOrder();
-                    DataRevenue();
-                    DataOrder();
                 </script>
             </div>
 
@@ -392,6 +304,199 @@
                 </script>
             </div>
         </div>
+
+        <!-- //dive ke 2 Revenue-->
+
+        <div class="main-skills">
+            <div class="card">
+                <h1 class="title1">Bicycle Revenue Chart 2014</h1>
+
+                <div style="width: 400px">
+                    <canvas id="chartRevenue"></canvas>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script> -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+                <script type="module">
+
+                    const chartRevenue = document.getElementById("chartRevenue");
+
+                    
+                        const dataJson2 = await fetch("./data/total_revenue_perbulan2014.json");
+                        const dataObj2 = await dataJson2.json();
+                        console.log(dataJson2)
+
+                        new Chart(chartRevenue, {
+                        type: "line",
+                        data: {
+                            labels: dataObj2.map((item) => item.bulan),
+                            datasets: [
+                            {
+                                label: "Total Revenue perbulan tahun 2014",
+                                data: dataObj2.map((item) => item.total_revenue),
+                                borderWidth: 1,
+                            }],
+                        },
+                        //pluggin zoom
+                        options: {
+                                plugins: {
+                                zoom: {
+                                    zoom: {
+                                    wheel: {
+                                        enabled: true,
+                                    },
+                                    pinch: {
+                                        enabled: true
+                                    },
+                                    mode: 'xy',
+                                    }
+                                }
+                                }
+                            }, //pluggin zoom
+                        });            
+                </script>
+            </div>
+
+            <div class="card">
+                <h1 class="title2">Bicycle Revenue Table 2014</h1>
+
+                <div class="table-container">
+                    <table id="data-table1" class="display">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Total Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data Total Revenue Order Quantity 2014 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DataTables JavaScript -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        fetch('./data/total_revenue_perbulan2014.json').then(response => response.json()).then(data => {
+                            const tbody = $('#data-table1 tbody');
+                            
+                            data.forEach(table => {
+                                const tr = $('<tr>');
+
+                                const monthTd = $('<td>').text(table.bulan);
+                                const revenueTd = $('<td>').text(table.total_revenue);
+                                
+                                tr.append(monthTd, revenueTd);
+                                tbody.append(tr);
+                            });
+
+                            $('#data-table1').DataTable();
+                        }).catch(error => console.error('Error fetching data:', error));
+                    });
+                </script>
+            </div>
+        </div>
+
+        <!-- div Order Quantity -->
+
+        <div class="main-skills">
+            <div class="card">
+                <h1 class="title1">Bicycle Order Quantity Chart 2014</h1>
+
+                <div style="width: 400px">
+                    <canvas id="chartOrder"></canvas>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script> -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+                <script type="module">
+
+                        const chartOrder = document.getElementById("chartOrder");
+
+                    
+                        const dataJson3 = await fetch("./data/total_quantity_perbulan2014.json");
+                        const dataObj3 = await dataJson3.json();
+                        console.log(dataJson3)
+
+                        new Chart(chartOrder, {
+                        type: "line",
+                        data: {
+                            labels: dataObj3.map((item) => item.bulan),
+                            datasets: [
+                            {
+                                label: "Total Order Quantity perbulan tahun 2014",
+                                data: dataObj3.map((item) => item.total_quantity),
+                                borderWidth: 1,
+                            }],
+                        },
+                        //pluggin zoom
+                        options: {
+                                plugins: {
+                                zoom: {
+                                    zoom: {
+                                    wheel: {
+                                        enabled: true,
+                                    },
+                                    pinch: {
+                                        enabled: true
+                                    },
+                                    mode: 'xy',
+                                    }
+                                }
+                                }
+                            }, //pluggin zoom
+                        });
+                                
+                </script>
+            </div>
+
+            <div class="card">
+                <h1 class="title2">Bicycle Order Quantity Table 2014</h1>
+
+                <div class="table-container">
+                    <table id="data-table2" class="display">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Total Order Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data Total Order Quantity 2014 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DataTables JavaScript -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        fetch('./data/total_quantity_perbulan2014.json').then(response => response.json()).then(data => {
+                            const tbody = $('#data-table2 tbody');
+                            
+                            data.forEach(table => {
+                                const tr = $('<tr>');
+
+                                const monthTd = $('<td>').text(table.bulan);
+                                const orderTd = $('<td>').text(table.total_quantity);
+
+                                tr.append(monthTd, orderTd);
+                                tbody.append(tr);
+                            });
+
+                            $('#data-table2').DataTable();
+                        }).catch(error => console.error('Error fetching data:', error));
+                    });
+                </script>
+            </div>
+        </div>
+        
+        <!-- Bar Chart Sub-Category -->
         
         <section class="main-course">
             <div class="course-box">
